@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Not found Page</title>
+    <%- include ("../partials/head") %>
   </head>
   <body>
-    This is 404
+    <%- include ("../partials/header") %>
+
+    <main class="container main-wrapper">
+      <section class="lost">
+        <div class="lost__description">
+          <h1>404</h1>
+          <h4>Page Not Found</h4>
+          <a href="/"><span>Go Back To Home</span></a>
+        </div>
+        <img src="../../images/404.png" alt="page not found" />
+      </section>
+    </main>
+
+    <%- include ("../partials/footer") %>
+
+    <script src="../../js/main.js"></script>
   </body>
 </html>

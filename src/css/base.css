@@ -1,0 +1,93 @@
+@import url("loading.css");
+@import url("header.css");
+@import url("navigator.css");
+@import url("footer.css");
+
+@import url("lost.css");
+
+:root {
+  /* palette */
+  --orange: 236, 100, 137;
+  --purple: 100, 37, 236;
+  --green: 37, 236, 100;
+  --red: 236, 37, 85;
+  --white-rgb: 255, 255, 255;
+  --gray: 100, 100, 100;
+
+  --primary-color: #ec6425;
+  --secondary-color: #6425ec;
+  --werkspot-blue: #3299cb;
+  --bright-red: #ec2555;
+  --bright-green: #25ec64;
+  --primary-light: #f5f5f5;
+
+  --light-gray: #bebebe;
+  --median-gray: #666666;
+  --dark-gray: #2e2c2c;
+
+  --white: #ffffff;
+  --dark: #000000;
+
+  /* Typography */
+  font-family: "Roboto Slab", "Lato", sans-serif, serif;
+  font-size: var(--primary-font-size);
+
+  --primary-font-face: "Roboto Slab";
+  --secondary-font-face: "Lato";
+
+  --primary-font-size: 24px;
+  --secondary-font-size: 18px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  min-width: auto;
+  padding: 0;
+  margin: 0;
+  background-color: var(--primary-light);
+}
+
+a {
+  text-decoration: none;
+  user-select: none;
+  color: var(--primary-color);
+}
+
+button {
+  all: unset;
+  font-size: 0.625rem;
+  padding: 0.3em 1.7em;
+  border-radius: 0.2em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--bright-green);
+  background-color: rgba(var(--white-rgb), 0.4);
+  border: 1px solid var(--bright-green);
+}
+
+button:hover {
+  color: var(--white);
+  background-color: var(--bright-green);
+}
+
+.container {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.main-wrapper {
+  width: 100%;
+  min-height: calc(100vh - 102px);
+  height: fit-content;
+  padding-top: calc(102px + 2rem);
+  padding-bottom: 2rem;
+  overflow: scroll;
+}
