@@ -35,7 +35,9 @@
       storeTopStories(topStoriesIDs);
 
       const topStories = await getTopStories();
-      console.log({ topStories });
+      renderStories(topStories);
+
+      toggleVisibility({ element: postListContainer });
     } catch (err) {
       console.error(err);
       toggleVisibility({ element: errorBox, isFlex: true });
@@ -101,4 +103,31 @@
   function storeTopStories(topStoriesIDs) {
     localStorage.setItem("topStories", JSON.stringify(topStoriesIDs));
   }
+
+  function renderStories(stories) {
+    const count = postList.childElementCount;
+
+    stories.map((storyItem, i) => {
+      createElement({
+        tagName: "article",
+        className: "story-item",
+        appendTo: postList,
+        callback: (element) => {
+          element.innerHTML = Renderer.RenderStory(storyItem, count + i);
+        },
+      });
+    });
+  }
+
+  const createElement = ({
+    tagName = "div",
+    className,
+    appendTo,
+    callback,
+  }) => {
+    const element = document.createElement(tagName);
+    if (className) element.className = className;
+    if (appendTo) appendTo.appendChild(element);
+    if (callback) callback(element);
+  };
 })();
