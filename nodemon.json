@@ -1,0 +1,12 @@
+{
+  "restartable": "rs",
+  "ignore": [".git", "node_modules/**/node_modules", "test", "dist", "built"],
+  "verbose": true,
+
+  "runOnChangeOnly": false,
+  "watch": ["src/**/*.js", "src/**/*.css", "src/**/*.ejs"],
+  "ext": "js,json,css,html,ejs",
+  "env": {
+    "APP_PORT": 3000
+  }
+}
