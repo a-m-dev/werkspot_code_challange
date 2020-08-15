@@ -16,6 +16,7 @@
   --green: 37, 236, 100;
   --red: 236, 37, 85;
   --white-rgb: 255, 255, 255;
+  --black-rgb: 0, 0, 0;
   --gray: 100, 100, 100;
 
   --primary-color: #ec6425;
@@ -111,4 +112,10 @@ button:hover {
 
 .visible-off {
   display: none;
+}
+
+#moreeeee {
+  width: 100%;
+  height: 100px;
+  display: block;
 }

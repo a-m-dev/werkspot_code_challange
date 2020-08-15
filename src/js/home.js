@@ -7,8 +7,13 @@
   let postList = null;
   let postListContainer = null;
 
+  let moreBox = null;
+
   let page = 1;
   let perPage = 10;
+
+  let previousY = 0;
+  let previousRatio = 0;
 
   document.addEventListener("DOMContentLoaded", initiate, false);
 
@@ -20,6 +25,14 @@
 
     postList = document.querySelector(".post-list");
     postListContainer = document.querySelector(".post-list__container");
+
+    moreBox = document.querySelector("#moreeeee");
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      threshold: thresholdArray(20),
+    });
+
+    observer.observe(moreBox);
 
     main();
   }
@@ -74,6 +87,25 @@
       }
   }
 
+  async function loadMore() {
+    if (loadingIndicator.classList.contains("visible-on--flex")) return;
+
+    // loading true
+    toggleVisibility({ element: loadingIndicator, isFlex: true });
+
+    // increment page
+    page++;
+    console.log({ page });
+
+    // get data
+    const newPageData = await getTopStories();
+    console.log({ newPageData });
+    renderStories(newPageData);
+
+    // loading off
+    toggleVisibility({ element: loadingIndicator, isFlex: true });
+  }
+
   /** Utils */
   function toggleVisibility({ element, isFlex = false }) {
     switch (true) {
@@ -119,15 +151,36 @@
     });
   }
 
-  const createElement = ({
-    tagName = "div",
-    className,
-    appendTo,
-    callback,
-  }) => {
+  function createElement({ tagName = "div", className, appendTo, callback }) {
     const element = document.createElement(tagName);
     if (className) element.className = className;
     if (appendTo) appendTo.appendChild(element);
     if (callback) callback(element);
-  };
+  }
+
+  function handleIntersect(entries) {
+    if (entries[0].intersectionRatio <= 0) return;
+
+    entries.forEach((entry) => {
+      const currentY = entry.boundingClientRect.y;
+      const currentRatio = entry.intersectionRatio;
+      const isIntersecting = entry.isIntersecting;
+
+      // Scrolling down
+      if (currentY < previousY) {
+        if (currentRatio > previousRatio && isIntersecting) {
+          loadMore();
+        }
+      }
+
+      previousY = currentY;
+      previousRatio = currentRatio;
+    });
+  }
+
+  function thresholdArray(steps) {
+    return Array(steps + 1)
+      .fill(0)
+      .map((_, index) => index / steps || 0);
+  }
 })();
