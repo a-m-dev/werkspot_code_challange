@@ -29,7 +29,7 @@ app.get("/ask", (req, res, next) => {
   res.render("pages/ask");
 });
 
-app.get("*", (req, res, next) => {
+app.get("*/:sdfsdf?", (req, res, next) => {
   res.render("pages/404");
 });
 
