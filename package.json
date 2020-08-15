@@ -1,0 +1,29 @@
+{
+  "name": "werkspot_hacker_news",
+  "version": "1.0.0",
+  "description": "coding challenge of Werkspot",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-m-dev/werkspot_code_challenge.git"
+  },
+  "keywords": [
+    "javascript",
+    "vanilla",
+    "js",
+    "node",
+    "express",
+    "localStorage",
+    "BEM",
+    "css"
+  ],
+  "author": "Ahmad Mirzaei (@a_m_dev)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a-m-dev/werkspot_code_challenge/issues"
+  },
+  "homepage": "https://github.com/a-m-dev/werkspot_code_challenge#readme"
+}
