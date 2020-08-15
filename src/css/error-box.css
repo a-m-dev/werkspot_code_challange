@@ -1,0 +1,17 @@
+.error-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 5rem;
+}
+
+.error-box img {
+  max-width: 250px;
+}
+
+.error-box p {
+  font-size: 1rem;
+  color: var(--median-gray);
+}

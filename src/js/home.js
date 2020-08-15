@@ -13,7 +13,8 @@
 
   function initiate() {
     errorBox = document.querySelector(".error-box");
-    loadingIndicator = document.querySelector("loading");
+    loadingIndicator = document.querySelector(".loading");
+
     postList = document.querySelector(".post-list");
     postListContainer = document.querySelector(".post-list__container");
 
@@ -26,6 +27,8 @@
     loadingIndicator.classList.add("visible-on--flex");
 
     try {
+      const topStoriesIDs = await ServiceManagerInstance.getTopStoriesIDsList();
+      console.log({ topStoriesIDs });
     } catch (err) {
       console.error(err);
       toggleVisibility({ element: errorBox, isFlex: true });
@@ -59,4 +62,4 @@
         break;
     }
   }
-});
+})();
