@@ -17,6 +17,22 @@ app.get(/^\/(?:index)?(?:[#?]|$)/, (req, res, next) => {
   res.render("pages/index");
 });
 
+app.get("/comments", (req, res, next) => {
+  res.render("pages/comments");
+});
+
+app.get("/past", (req, res, next) => {
+  res.render("pages/past");
+});
+
+app.get("/ask", (req, res, next) => {
+  res.render("pages/ask");
+});
+
+app.get("*", (req, res, next) => {
+  res.render("pages/404");
+});
+
 app.listen(PORT, () => {
   console.log(`App is Ready on Port ${PORT}`);
 });
