@@ -7,6 +7,9 @@
   let postList = null;
   let postListContainer = null;
 
+  let page = 1;
+  let perPage = 10;
+
   document.addEventListener("DOMContentLoaded", initiate, false);
 
   /*************************************************** */
@@ -28,13 +31,45 @@
 
     try {
       const topStoriesIDs = await ServiceManagerInstance.getTopStoriesIDsList();
-      console.log({ topStoriesIDs });
+
+      storeTopStories(topStoriesIDs);
+
+      const topStories = await getTopStories();
+      console.log({ topStories });
     } catch (err) {
       console.error(err);
       toggleVisibility({ element: errorBox, isFlex: true });
     } finally {
       toggleVisibility({ element: loadingIndicator, isFlex: true });
     }
+  }
+
+  async function getTopStories() {
+    const topStoryIDs = JSON.parse(localStorage.getItem("topStories"));
+
+    const loopedResult = await Promise.all(
+      topStoryIDs.map(getSliceOfStoryInventory)
+    );
+
+    return loopedResult.filter((el) => el !== undefined);
+  }
+
+  async function getSliceOfStoryInventory(id, i) {
+    const stories = JSON.parse(localStorage.getItem("stories")) || {};
+
+    if (i >= (page - 1) * perPage && i < page * perPage)
+      if (stories[id]) return stories[id];
+      else {
+        const itemData = await ServiceManagerInstance.getTopStory({ id });
+
+        const oldStories = JSON.parse(localStorage.getItem("stories"));
+        localStorage.setItem(
+          "stories",
+          JSON.stringify({ ...oldStories, [itemData.id]: itemData })
+        );
+
+        return itemData;
+      }
   }
 
   /** Utils */
@@ -61,5 +96,9 @@
       default:
         break;
     }
+  }
+
+  function storeTopStories(topStoriesIDs) {
+    localStorage.setItem("topStories", JSON.stringify(topStoriesIDs));
   }
 })();

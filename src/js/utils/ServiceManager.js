@@ -9,6 +9,7 @@ class ServiceManager {
     this.BASE_URL = "https://hacker-news.firebaseio.com/v0";
     this.END_POINTS = {
       topStoriesIDsList: () => `${this.BASE_URL}/topstories.json`,
+      topStory: (id) => `${this.BASE_URL}/item/${id}.json`,
     };
   }
 
@@ -29,6 +30,9 @@ class ServiceManager {
 
   getTopStoriesIDsList = () =>
     this.fetchBase({ url: this.END_POINTS.topStoriesIDsList() });
+
+  getTopStory = ({ id }) =>
+    this.fetchBase({ url: this.END_POINTS.topStory(id) });
 }
 
 const ServiceManagerInstance = new ServiceManager();
