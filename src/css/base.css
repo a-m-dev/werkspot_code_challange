@@ -3,6 +3,7 @@
 @import url("navigator.css");
 @import url("footer.css");
 
+@import url("home.css");
 @import url("lost.css");
 
 :root {
@@ -90,4 +91,21 @@ button:hover {
   padding-top: calc(102px + 2rem);
   padding-bottom: 2rem;
   overflow: scroll;
+}
+
+.ease-transition {
+  transition: background-color 0.15s ease-in-out, opacity 0.15s ease-in-out,
+    color 0.15s ease-in-out;
+}
+
+.visible-on {
+  display: block;
+}
+
+.visible-on--flex {
+  display: flex;
+}
+
+.visible-off {
+  display: none;
 }

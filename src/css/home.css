@@ -1,0 +1,61 @@
+.heading-werkspot-logo {
+  width: 100%;
+  max-height: 400px;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 1em;
+  margin-bottom: 4rem;
+  position: relative;
+  background-color: var(--werkspot-blue);
+}
+
+.heading-werkspot-logo img {
+  width: 100%;
+}
+
+.heading-werkspot-logo h6 {
+  position: absolute;
+  bottom: 1.5em;
+  right: 2em;
+  margin: 0;
+  color: var(--white);
+  opacity: 0.7;
+}
+
+.heading-werkspot-logo h6:hover {
+  opacity: 1;
+}
+
+.heading-werkspot-logo h6 a {
+  all: unset;
+  cursor: pointer;
+  color: var(--white);
+}
+
+.post-list__container {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  /* overflow: hidden; */
+}
+
+.post-list__title {
+  padding: 0 1rem;
+}
+
+.post-list {
+  position: relative;
+}
+
+/* RESPONSIVE */
+@media only screen and (max-width: 480px) {
+  .heading-werkspot-logo h6 {
+    font-size: 0.5rem;
+    text-align: center;
+    right: 0;
+    width: 100%;
+  }
+}

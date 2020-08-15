@@ -7,10 +7,28 @@
   <body>
     <%- include ("../partials/header") %>
 
-    <main class="container main-wrapper"></main>
+    <main class="container main-wrapper">
+      <article class="heading-werkspot-logo">
+        <img src="/images/werkspot_logo.jpg" alt="werkspot-logo" />
+        <h6 class="ease-transition">
+          Coding challenge, by
+          <a
+            href="https://stackoverflow.com/users/5354341/a-m-dev?tab=profile"
+            target="_blank"
+            >@a_m_dev</a
+          >
+        </h6>
+      </article>
+
+      <section class="error-box visible-off">
+        <img src="/images/fail.png" alt="error network call" />
+        <p>There was an Error, reload the page please!</p>
+      </section>
+    </main>
 
     <%- include ("../partials/footer") %>
 
     <script src="../../js/main.js"></script>
+    <script src="../../js/home.js"></script>
   </body>
 </html>
