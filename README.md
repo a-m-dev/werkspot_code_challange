@@ -7,7 +7,7 @@ A New Version of HackerNews Website
 first run `npm install` or `yarn`
 then run `npm run build` and finally run `npm run start`
 
-for development purpose, you can user `npm run dev` or relevant `yarn` command to boot up the express server!
+for development purpose, you can user `npm run dev` or relevant `yarn` command to boot up the express server on port 3000!
 
 ### Also here are some notes about the project:
 
@@ -19,7 +19,7 @@ Also another interesting feature of this project is the ability to cache the req
 
 For testing I used jest but time was a little bit less than I could write all of my tests.
 
-Best!
+Best! 
 Ahmad!
 
 @a_m_dev
