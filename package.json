@@ -33,7 +33,8 @@
   "homepage": "https://github.com/a-m-dev/werkspot_code_challenge#readme",
   "dependencies": {
     "ejs": "^3.1.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "moment": "^2.27.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -42,8 +43,14 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
+    "@testing-library/dom": "^7.22.2",
+    "@testing-library/jest-dom": "^5.11.3",
+    "babel-jest": "^26.3.0",
     "babel-preset-minify": "^0.5.1",
+    "jest": "^26.4.0",
+    "jsdom": "^16.4.0",
     "nodemon": "^2.0.4",
+    "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2"
   }
 }
