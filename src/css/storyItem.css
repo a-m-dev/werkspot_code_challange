@@ -169,6 +169,7 @@
   font-weight: bold;
   background-color: rgba(var(--white-rgb), 0.85);
   backdrop-filter: blur(10px) brightness(1);
+  -webkit-backdrop-filter: blur(10px) brightness(1);
   border-bottom-right-radius: 1em;
   border-bottom-left-radius: 1em;
 }

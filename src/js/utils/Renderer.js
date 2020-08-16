@@ -65,6 +65,28 @@ class HtmlRenderer {
       </article>
     `;
   }
+
+  RenderComment(comment) {
+    const publishDate = moment(comment.time * 1000).fromNow();
+
+    return `
+    
+      <section class='story-item__comment-heading'>
+
+        <div class='story-item__comment-heading-author'>
+          by <b>${comment.by}</b>, <em>${publishDate}</em>
+        </div>
+      </section>
+
+      <section class='story-item__comment-body'>
+        ${comment.text}
+        <div class='story-item__comment-body-more'>
+          <span>Read More</span>
+        </div>
+
+      </section>
+    `;
+  }
 }
 
 const Renderer = new HtmlRenderer();

@@ -59,7 +59,11 @@ body {
 a {
   text-decoration: none;
   user-select: none;
-  color: var(--primary-color);
+  color: var(--bright-green);
+}
+
+a:hover {
+  color: var(--white);
 }
 
 button {
@@ -71,14 +75,20 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--bright-green);
   background-color: rgba(var(--white-rgb), 0.4);
   border: 1px solid var(--bright-green);
 }
 
+button span {
+  color: var(--bright-green);
+}
+
 button:hover {
-  color: var(--white);
   background-color: var(--bright-green);
+}
+
+button:hover span {
+  color: var(--white) !important;
 }
 
 .container {

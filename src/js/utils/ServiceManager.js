@@ -33,6 +33,9 @@ class ServiceManager {
 
   getTopStory = ({ id }) =>
     this.fetchBase({ url: this.END_POINTS.topStory(id) });
+
+  getComment = ({ id }) =>
+    this.fetchBase({ url: this.END_POINTS.topStory(id) });
 }
 
 const ServiceManagerInstance = new ServiceManager();

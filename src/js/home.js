@@ -90,19 +90,13 @@
   async function loadMore() {
     if (loadingIndicator.classList.contains("visible-on--flex")) return;
 
-    // loading true
     toggleVisibility({ element: loadingIndicator, isFlex: true });
 
-    // increment page
     page++;
-    console.log({ page });
 
-    // get data
     const newPageData = await getTopStories();
-    console.log({ newPageData });
     renderStories(newPageData);
 
-    // loading off
     toggleVisibility({ element: loadingIndicator, isFlex: true });
   }
 
@@ -149,6 +143,111 @@
         },
       });
     });
+
+    let selector = ".story-item__details-comments";
+    let commentsElements = document.querySelectorAll(selector);
+
+    for (let i = 0; i < commentsElements.length; i++) {
+      commentsElements[i].addEventListener("click", (e) => {
+        toggleRelatedCommentSection(e, commentsElements[i]);
+      });
+    }
+  }
+
+  function toggleRelatedCommentSection(e, element) {
+    const targetId = e.currentTarget.dataset.id;
+    loadStoryComments({ targetId, element });
+
+    const commentsSection = element.parentElement.nextElementSibling;
+    toggleVisibility({ element: commentsSection, isFlex: false });
+  }
+
+  async function loadStoryComments({ targetId, element }) {
+    const commentsSection = element.parentElement.nextElementSibling;
+
+    const commentLoadingIndicator = commentsSection.querySelector(".loading");
+    const commentList = commentsSection.querySelector(
+      ".story-item__comments-container"
+    );
+
+    const stories = JSON.parse(localStorage.getItem("stories"));
+    const commentIDs = stories[targetId].kids;
+
+    const comments = await getComments(commentIDs);
+
+    renderComments({
+      comments,
+      appendTo: commentList,
+      loadingIndecator: commentLoadingIndicator,
+    });
+
+    let selector = ".story-item__comment-body-more";
+    let readMores = commentsSection.querySelectorAll(selector);
+
+    for (let i = 0; i < readMores.length; i++) {
+      readMores[i].addEventListener("click", (e) =>
+        toggleReadMore(e, readMores[i])
+      );
+
+      if (readMores[i].parentElement.scrollHeight < 75)
+        readMores[i].classList.add("visible-off");
+      else readMores[i].classList.remove("visible-off");
+    }
+  }
+
+  function renderComments({ comments, appendTo, loadingIndecator }) {
+    comments.map((comment) => {
+      createElement({
+        tagName: "section",
+        className: "story-item__comment comment-height--limited",
+        appendTo,
+        callback: (commentElement) => {
+          commentElement.innerHTML = Renderer.RenderComment(comment);
+        },
+      });
+    });
+
+    toggleVisibility({ element: loadingIndecator, isFlex: false });
+  }
+
+  async function getComments(commentIDs) {
+    const loopedComments = await Promise.all(commentIDs.map(handleGetComment));
+    return loopedComments;
+  }
+
+  async function handleGetComment(commentID, i) {
+    const comments = JSON.parse(localStorage.getItem("comments")) || {};
+
+    if (comments[commentID]) return comments[commentID];
+    else {
+      const commentData = await ServiceManagerInstance.getComment({
+        id: commentID,
+      });
+
+      const oldComments = JSON.parse(localStorage.getItem("comments"));
+      localStorage.setItem(
+        "comments",
+        JSON.stringify({ ...oldComments, [commentData.id]: commentData })
+      );
+
+      return commentData;
+    }
+  }
+
+  function toggleReadMore(e, element) {
+    const readMoreText = element.firstElementChild;
+    const parent = element.parentElement.parentElement;
+
+    if (parent.classList.contains("comment-height--limited")) {
+      parent.classList.remove("comment-height--limited");
+      parent.classList.add("comment-height--unlimited");
+
+      readMoreText.innerHTML = "Less";
+    } else {
+      parent.classList.remove("comment-height--unlimited");
+      parent.classList.add("comment-height--limited");
+      readMoreText.innerHTML = "More...";
+    }
   }
 
   function createElement({ tagName = "div", className, appendTo, callback }) {
@@ -166,7 +265,6 @@
       const currentRatio = entry.intersectionRatio;
       const isIntersecting = entry.isIntersecting;
 
-      // Scrolling down
       if (currentY < previousY) {
         if (currentRatio > previousRatio && isIntersecting) {
           loadMore();
